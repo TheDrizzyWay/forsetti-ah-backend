@@ -1,4 +1,5 @@
 import UserController from './user.controller';
+import AuthController from './auth.controller';
 import CommentController from './comment.controller';
 import ProfileController from './profile.controller';
 import ArticleController from './article.controller';
@@ -8,6 +9,7 @@ import SearchControllers from './article-search-controller';
 
 export {
   UserController,
+  AuthController,
   ProfileController,
   ArticleController,
   CommentController,

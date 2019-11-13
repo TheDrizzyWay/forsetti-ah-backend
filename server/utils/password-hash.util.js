@@ -1,12 +1,10 @@
 import bcrypt from 'bcrypt';
 
 /**
- * Generates a JWT token
+ * Generates a hashed password
  * @param {string} password
- * @returns {string} token
+ * @returns {string} hash
  */
-/* istanbul ignore next */
 const passwordHash = async password => bcrypt.hash(password, 10);
-
 
 export default passwordHash;
