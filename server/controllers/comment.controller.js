@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import db from '../models';
-import { Response, newCommentMail, saveCommentHistory } from '../utils';
+import { Response, newCommentMail } from '../utils';
 
 dotenv.config();
 
@@ -9,9 +9,7 @@ const {
   Comment,
   User,
   DraftComment,
-  Article,
-  CommentLike,
-  CommentHistory,
+  Article
 } = db;
 
 /**
@@ -126,55 +124,6 @@ class CommentController {
   }
 
   /**
-   * Like comment controller
-   * @param {Object} req
-   * @param {Object} res
-   * @returns {Object} response
-   */
-  static async likeComment(req, res) {
-    const { id } = req.user;
-    const { commentId } = req.params;
-
-    const commentResponse = await Comment.findOne({
-      attributes: ['comment'],
-      where: { id: commentId },
-    });
-    if (!commentResponse) return Response(res, 404, 'Comment not found');
-    const { comment } = commentResponse.dataValues;
-
-    const likeComment = await CommentLike.create({
-      userid: id,
-      commentid: commentId,
-    });
-    const { id: likeid, userid } = likeComment.dataValues;
-    const likeObject = {
-      id: likeid,
-      comment,
-      userid,
-    };
-    return Response(res, 201, 'Comment liked successfully', likeObject);
-  }
-
-  /**
-   * Get all comment history
-   * @param {*} req
-   * @param {*} res
-   * @returns {object} response
-   */
-  static async getCommentHistory(req, res) {
-    const { commentId } = req.params;
-    const comment = await Comment.findByPk(commentId);
-    if (!comment) return Response(res, 404, 'Comment does not exist');
-    const commentHistory = await CommentHistory.findAndCountAll({
-      where: { commentId },
-      attributes: {
-        exclude: ['id']
-      },
-    });
-    return Response(res, 200, 'Comment history retrieved successfully', commentHistory);
-  }
-
-  /**
     * @description Deletes a user's comment
     * @param {object} req - The request object
     * @param {object} res - The response object
@@ -226,7 +175,6 @@ class CommentController {
     });
 
     const table = articleExists.dataValues.published ? Comment : DraftComment;
-    await saveCommentHistory(id);
     const editedComment = await table.update({
       comment
     }, {

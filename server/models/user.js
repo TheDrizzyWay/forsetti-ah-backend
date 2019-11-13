@@ -88,7 +88,6 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Readstat, {
       foreignKey: 'userId'
     });
-    User.hasMany(models.CommentLike);
     User.hasMany(models.Bookmark, {
       foreignKey: 'userId',
       otherKey: 'articleId',

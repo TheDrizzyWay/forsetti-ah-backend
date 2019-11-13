@@ -165,61 +165,6 @@ describe('User post highlighted text', () => {
   });
 });
 
-describe('Comment history tests', () => {
-  describe('Save comment history function', () => {
-    const commentId = 'bcf38432-2c98-4008-afaf-e510eb9c69e5'; // created by seeder
-    const fakeCommentIdID = 'db7e5f06-4017-49f7-bfc9-e37af08e9280';
-    it('should return false if commentID is not found', async () => {
-      const result = await saveCommentHistory(fakeCommentIdID);
-      expect(result).to.equal(false);
-    });
-
-    it('should return true if commentId is found', async () => {
-      const result = await saveCommentHistory(commentId);
-      expect(result).to.equal(true);
-    });
-
-    let savedCommentHistory;
-    before(async () => {
-      await saveCommentHistory(commentId);
-
-      savedCommentHistory = await CommentHistory.findOne({
-        attributes: ['comment'],
-        where: {
-          commentId
-        }
-      });
-    });
-    it('should successfully insert current comment into the CommentHistories table', async () => {
-      expect(savedCommentHistory.comment).to.equal('Quisque ultrices nunc at quam vulputate, vitae maximus risus pharetra');
-    });
-  });
-});
-
-describe('Get comment history', () => {
-  describe('GET /api/v1/article/comment/:commentId/history', () => {
-    const fakeCommentIdID = 'db7e5f06-4017-49f7-bfc9-e37af08e9280';
-    const commentId = 'c22c38cf-894c-417c-acf8-68eb0712bdaa';
-    it('should return 404 if comment is not found', async () => {
-      const res = await chai.request(app)
-        .get(`/api/v1/article/comment/${fakeCommentIdID}/history`)
-        .set({ Authorization: `Bearer ${token}` });
-
-      expect(res).to.have.status(404);
-      expect(res.body).to.have.property('message').eql('Comment does not exist');
-    });
-
-    it('should return previously edited comments associated to a comment', async () => {
-      const res = await chai.request(app)
-        .get(`/api/v1/article/comment/${commentId}/history`)
-        .set({ Authorization: `Bearer ${token}` });
-
-      expect(res).to.have.status(200);
-      expect(res.body.data.rows[0]).to.have.property('comment').eql('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum | updated first');
-    });
-  });
-});
-
 describe('Edit comment', () => {
   it('should return 200 if article is successfully edited', async () => {
     const res = await chai.request(app)
