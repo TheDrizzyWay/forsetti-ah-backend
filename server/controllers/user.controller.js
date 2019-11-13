@@ -149,7 +149,7 @@ class UserController {
       const {
         id, firstname, lastname, roleId, username
       } = userResponse;
-      const token = await generateToken({ id, roleId }, '30d');
+      const token = generateToken({ id, roleId }, '30d');
       const data = {
         token,
         user: {
