@@ -14,7 +14,7 @@ module.exports = {
       },
       type: {
         allowNull: false,
-        type: Sequelize.ENUM('follow', 'article', 'comment', null),
+        type: Sequelize.ENUM('follow', 'article', 'comment'),
       },
       isSeen: {
         allowNull: false,
