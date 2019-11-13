@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
 import db from '../models';
+import { frontendUrl } from '../config/variables';
 import {
   passwordHash,
   generateToken,
@@ -9,62 +9,13 @@ import {
   mailTemplate
 } from '../utils';
 
-const { User, Role, Follower } = db;
-dotenv.config();
+const { User, Role } = db;
+
 /**
  * User Controller
  * @package User
  */
 class UserController {
-  /**
-   * Create a user
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} responseObject
-   */
-  static async create(req, res) {
-    const {
-      firstname,
-      lastname,
-      email,
-      username,
-      password
-    } = req.body;
-
-    const hashedPassword = await passwordHash(password);
-    const { id } = await User.create({
-      firstname,
-      lastname,
-      email,
-      username,
-      password: hashedPassword,
-    });
-
-    const token = await generateToken({
-      id,
-    }, '30d');
-    const userInfo = {
-      token,
-      user: {
-        firstname,
-        lastname,
-        email,
-        username
-      }
-    };
-
-    const body = `<p>Thanks for joining and we hope you read stories that change your life forever!</p>
-    Warm regards.`;
-
-    const mailOption = {
-      email,
-      subject: 'Welcome to Author\'s Haven',
-      message: mailTemplate(`Hello ${firstname} ${lastname},`, body)
-      ,
-    };
-    sendMail(mailOption);
-    return Response(res, 201, 'User registered successfully', [userInfo]);
-  }
   /**
    * @description returns tokens and profile from social service
    * @param {string} accessToken
@@ -117,7 +68,7 @@ class UserController {
    */
   static async socialRedirect(req, res) {
     if (req.user.noEmail) {
-      return res.redirect(`${process.env.FRONTEND_URL}/auth/social?error=${400}`);
+      return res.redirect(`${frontendUrl}/auth/social?error=${400}`);
     }
 
     const {
@@ -127,51 +78,7 @@ class UserController {
       id,
       email
     }, '30d');
-    return res.redirect(`${process.env.FRONTEND_URL}/auth/social?token=${token}&userid=${id}&firstname=${firstname}&lastname=${lastname}&username=${username}&email=${email}`);
-  }
-
-  /**
-   * @description Sign in User
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} res
-   */
-
-  static async signinUser(req, res) {
-    const { email, password } = req.body;
-    const successMessage = 'Signed in successfully';
-    const errorMessage = 'Invalid Credentials';
-
-    const userResponse = await User.findOne({
-      where: { email },
-    });
-    if (userResponse && userResponse.isPasswordValid(password)) {
-      const {
-        id, firstname, lastname, roleId, username
-      } = userResponse;
-      const token = generateToken({ id, roleId }, '30d');
-      const data = {
-        token,
-        user: {
-          id,
-          firstname,
-          lastname,
-          username,
-          email: userResponse.email,
-        }
-      };
-
-      const body = '<p>Someone has just accessed your account at Author\'s Haven. If you are the one, please ignore this mail.</p>';
-      const mailOption = {
-        email,
-        subject: `Hi ${firstname}`,
-        message: mailTemplate(`Hello ${firstname} ${lastname},`, body),
-      };
-      sendMail(mailOption);
-      Response(res, 200, successMessage, data);
-    } else {
-      Response(res, 400, errorMessage);
-    }
+    return res.redirect(`${frontendUrl}/auth/social?token=${token}&userid=${id}&firstname=${firstname}&lastname=${lastname}&username=${username}&email=${email}`);
   }
 
   /**
@@ -241,7 +148,7 @@ class UserController {
                   </p>
                   <p>
                     follow this link to reset your password
-                        <a href='${process.env.FRONTEND_URL}/auth/resetpassword?token=${token}'>reset password</a>
+                        <a href='${frontendUrl}/auth/resetpassword?token=${token}'>reset password</a>
                 </p>
                   <p>
                     <b style = 'color:black;'>Note</b> this link would expire in 15 minutes

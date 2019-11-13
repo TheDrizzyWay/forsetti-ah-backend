@@ -41,14 +41,14 @@ describe('POST /users/login', () => {
     expect(res.body.message).to.equal('Invalid Credentials');
   });
 
-  it('should return 422 if required values not sent', async () => {
+  it('should return 400 if required values not sent', async () => {
     const res = await chai.request(app)
       .post('/api/v1/auth/login')
       .send({
         email: 'melanie@dara.com'
       });
 
-    expect(res).to.have.status(422);
+    expect(res).to.have.status(400);
     expect(res.body).to.have.property('message').eql([{ password: 'password field is required' }]);
   });
 });

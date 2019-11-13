@@ -1,16 +1,15 @@
-
 /**
  * @desciption - Specify a key of an array that is required in another array
  *
- * @param {Object} haystack
- * @param {Array} needle
+ * @param {Object} obj
+ * @param {Array} items
  * @returns {Array} Array of required items
  */
-const isRequired = (haystack, needle) => {
+const isRequired = (obj, items) => {
   const required = [];
-  needle.forEach((value) => {
-    if (!Object.keys(haystack).includes(value)) {
-      required.push({ [value]: `${value} field is required` });
+  items.forEach((item) => {
+    if (!Object.keys(obj).includes(item)) {
+      required.push({ [item]: `${item} field is required` });
     }
   });
   return required;

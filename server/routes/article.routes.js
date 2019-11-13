@@ -6,9 +6,7 @@ import {
   BookmarkController,
   SearchControllers
 } from '../controllers';
-
-import { signInAuth } from '../utils/users/permissions.util';
-
+import { Authorization } from '../middleware';
 import {
   tryCatch,
   createArticle as createarticle,
@@ -49,6 +47,7 @@ const {
 const { validArticleId, validCommentId, validId } = UuidValidator;
 const { getArticles } = SearchControllers;
 const { checkQueryParams, checkSpecialChars } = SearchValidators;
+const { signInAuth } = Authorization;
 
 const router = new Router();
 

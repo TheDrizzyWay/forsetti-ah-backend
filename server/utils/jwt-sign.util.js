@@ -12,9 +12,8 @@ const { JWT_SECRET } = process.env;
  * @param {string} expires
  * @returns {string} token
  */
-const generateToken = (data, expires) => {
-  const token = jwt.sign(data, JWT_SECRET, { expiresIn: expires });
-  console.log(token);
+const generateToken = async (data, expires) => {
+  const token = await jwt.sign(data, JWT_SECRET, { expiresIn: expires });
   return token;
 };
 

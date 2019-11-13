@@ -1,7 +1,6 @@
 import tryCatch from './trycatch.util';
 import { generateToken, verifyToken } from './jwt-sign.util';
 import passwordHash from './password-hash.util';
-import userValidation from './users/user.util';
 import logger from './logger.util';
 import sendMail from './mail.util';
 import Response from './response.util';
@@ -22,10 +21,6 @@ import deleteImage from './articles/deleteImage.util';
 import commentIdValidator from './commentidvalidator.util';
 import readTime from './readTime.util';
 
-const {
-  userSignup, userExist, isSigninFieldEmpty, validateRole, validateProfile,
-  userNotExist, checkPassword, checkUsername
-} = userValidation;
 const { checkComments, validateCommentType, checkUser } = commentValidator;
 
 const {
@@ -46,17 +41,10 @@ export {
   generateToken,
   verifyToken,
   passwordHash,
-  userSignup,
-  userExist,
   logger,
   sendMail,
   Response,
-  isSigninFieldEmpty,
   UuidValidator,
-  validateRole,
-  validateProfile,
-  userNotExist,
-  checkPassword,
   mailTemplate,
   imageUpload,
   createArticle,
@@ -79,7 +67,6 @@ export {
   paramsValidate,
   SearchValidators,
   deleteImage,
-  checkUsername,
   commentIdValidator,
   checkUser,
   readTime,
