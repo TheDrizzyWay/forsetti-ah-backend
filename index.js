@@ -28,9 +28,6 @@ passport.use(googleStrategy);
 app.use(passport.initialize());
 
 app.use('/api/v1', router);
-app.get('/', (req, res) => {
-  res.send('Hello Forsetti');
-});
 
 app.listen(process.env.PORT || 5000, () => {
   logger.log('info', `Listening on port ${port}`);
