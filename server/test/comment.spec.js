@@ -1,13 +1,8 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../index';
-import { saveCommentHistory } from '../utils';
-import db from '../models';
-
-const { CommentHistory } = db;
 
 chai.use(chaiHttp);
-let alternateToken;
 let token;
 let id;
 before(async () => {
@@ -21,6 +16,7 @@ before(async () => {
   const response = userResponse.body.data;
   ({ token } = response);
 });
+
 describe('User post comment route', () => {
   it('should post a comment to an article', async () => {
     const res = await chai.request(app)
