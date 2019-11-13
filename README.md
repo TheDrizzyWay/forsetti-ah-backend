@@ -1,6 +1,6 @@
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
-[![Build Status](https://travis-ci.com/andela/forsetti-ah-backend.svg?branch=staging)](https://travis-ci.com/andela/forsetti-ah-backend)
-[![Coverage Status](https://coveralls.io/repos/github/andela/forsetti-ah-backend/badge.svg?branch=staging)](https://coveralls.io/github/andela/forsetti-ah-backend?branch=staging)
+[![Build Status](https://travis-ci.com/TheDrizzyWay/forsetti-ah-backend.svg?branch=master)](https://travis-ci.com/TheDrizzyWay/forsetti-ah-backend)
+[![Coverage Status](https://coveralls.io/repos/github/TheDrizzyWay/forsetti-ah-backend/badge.svg?branch=master)](https://coveralls.io/github/TheDrizzyWay/forsetti-ah-backend?branch=master)
 
 Authors Haven - A Social platform for the creative at heart.
 =======

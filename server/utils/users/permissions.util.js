@@ -42,23 +42,7 @@ const superAdminAuth = (req, res, next) => {
   return next();
 };
 
-/**
- * @description Checks if the user has a role of admin
- * @param {Object} req
- * @param {Object} res
- * @param {function} next
- * @returns {Object} response
- */
-const adminAuth = (req, res, next) => {
-  const { roleId } = req.user;
-  if (roleId !== 'a11f440b-eae3-4d28-990d-700c7b965709' && roleId !== 'b26180b4-b84f-42c3-bc2f-842854d4b6cb') {
-    return Response(res, 403, 'Access Denied. You do not have the permission to perform this action.');
-  }
-  return next();
-};
-
 export {
   signInAuth,
-  superAdminAuth,
-  adminAuth,
+  superAdminAuth
 };

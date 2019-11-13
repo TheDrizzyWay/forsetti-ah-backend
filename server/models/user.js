@@ -88,10 +88,6 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Readstat, {
       foreignKey: 'userId'
     });
-    User.hasMany(models.Report, {
-      foreignKey: 'userId',
-      onDelete: 'CASCADE',
-    });
     User.hasMany(models.CommentLike);
     User.hasMany(models.Bookmark, {
       foreignKey: 'userId',
