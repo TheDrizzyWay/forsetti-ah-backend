@@ -5,16 +5,11 @@ import {
   ClapController,
   BookmarkController,
 } from '../controllers';
-import { Authorization, UuidValidator, ArticleValidation } from '../middleware';
-import imageUpload from '../services/cloudinary.service';
 import {
-  tryCatch,
-  checkComments,
-  validateCommentType,
-  verifyText,
-  deleteImage,
-  checkUser,
-} from '../utils';
+  Authorization, UuidValidator, ArticleValidation, CommentValidation
+} from '../middleware';
+import imageUpload from '../services/cloudinary.service';
+import { tryCatch, verifyText, deleteImage } from '../utils';
 
 const {
   createComments, threadedComment, deleteComment, editComment
@@ -25,6 +20,7 @@ const {
   checkAuthor, shareArticleCheck, paramsValidate,
   checkQueryParams, checkSpecialChars
 } = ArticleValidation;
+const { checkComments, validateCommentType, checkUser } = CommentValidation;
 const {
   createArticle, editArticle, getOneArticle,
   shareArticle, deleteArticle, getAllTags,

@@ -1,9 +1,5 @@
-import dotenv from 'dotenv';
 import db from '../models';
 import { Response, newCommentMail } from '../utils';
-
-dotenv.config();
-
 
 const {
   Comment,
@@ -48,12 +44,7 @@ class CommentController {
     const getUser = await User.findByPk(id);
     if (newcomment) {
       const { createdAt, updatedAt } = newcomment;
-      const {
-        firstname,
-        username,
-        email,
-        image
-      } = getUser;
+      const { firstname, username, image } = getUser;
       const response = {
         comment: {
           id: newcomment.id,
@@ -85,9 +76,7 @@ class CommentController {
   static async threadedComment(req, res) {
     const { commentid, slug } = req.params;
     const { id } = req.user;
-    const {
-      comment
-    } = req.body;
+    const { comment } = req.body;
     const commentType = req.body.commentType || null;
 
     const articleExists = await Article.findOne({
@@ -96,11 +85,7 @@ class CommentController {
     const articleId = articleExists.dataValues.id;
     const table = articleExists.dataValues.published ? Comment : DraftComment;
     const getUser = await User.findByPk(id);
-    const {
-      firstname,
-      username,
-      image
-    } = getUser;
+    const { firstname, username, image } = getUser;
 
     const newThreadComment = await table.create({
       userId: id,
@@ -137,7 +122,6 @@ class CommentController {
     });
     if (!articleExists) return Response(res, 404, 'Article not found.');
 
-    const articleId = articleExists.dataValues.id;
     const table = articleExists.dataValues.published ? Comment : DraftComment;
     const commentExists = await table.findOne({
       where: {

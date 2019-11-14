@@ -12,3 +12,5 @@ export const twitterAppSecret = process.env.TWITTER_APP_SECRET;
 export const googleClientId = process.env.GOOGLE_CLIENT_ID;
 export const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 export const cloudinaryUrl = process.env.CLOUDINARY_URL;
+export const appPort = process.env.PORT;
+export const sessionSecret = process.env.SESSION_SECRET;

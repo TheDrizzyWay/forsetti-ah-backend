@@ -28,7 +28,7 @@ module.exports = {
       slug: 'Gildard is working on it-12345678',
       body: 'Dickson is a boy',
       description: 'gildard@dickson.com',
-      readingTime: '0.00 3',
+      readingTime: '0.003',
       userId: '3d1c5f17-7580-4cea-8647-99e7440c5d43',
       image: 'https://res.cloudinary.com/forsetti/image/upload/v1554746740/forsetti/b9leichyadygoqudemre.jpg'
     },

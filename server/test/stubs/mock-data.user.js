@@ -6,27 +6,6 @@ export default {
     username: 'David123',
     password: 'h-forsetti-2019'
   },
-  resetPasswordObject: {
-    firstname: 'Moe',
-    lastname: 'Donny',
-    email: 'moe.donny@andela.com',
-    username: 'moe123',
-    password: 'donny4535e5e'
-  },
-  invalidDataForgotPassword: {
-    firstname: 'Moe',
-    lastname: 'Donny',
-    email: 'moe.donnyandela.com',
-    username: 'moe1234',
-    password: 'don555'
-  },
-  invalidDataResetPassword: {
-    firstname: 'Moe',
-    lastname: 'Donny',
-    email: 'moe.donnyandela.com',
-    username: 'moe134',
-    password: 'donnyboydame'
-  },
   invalidData: [{
     firstname: '',
     lastname: 'Ogundimu',

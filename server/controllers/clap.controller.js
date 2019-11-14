@@ -19,6 +19,7 @@ class ClapController {
     } = req.params;
     const { id } = req.user;
     const isArticleExists = await Article.findOne({ where: { id: articleId } });
+
     if (!isArticleExists) return Response(res, 404, 'Article not found');
     const existingUserClap = await Clap.findOne({ where: { articleId, userId: id } });
     if (existingUserClap != null) return Response(res, 400, 'you cannot clap twice');

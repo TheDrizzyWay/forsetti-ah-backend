@@ -80,14 +80,14 @@ describe('User can follow and unfollow a user route', () => {
       .delete('/api/v1/profiles/Dimkpa/follow')
       .set({ Authorization: `Bearer ${userToken}` });
     expect(res).to.have.status(400);
-    expect(res.body.message).to.equal('Cannot follow user twice');
+    expect(res.body.message).to.equal('Cannot unfollow user twice');
   });
   it('should not unfollow a user if it is the same user requesting to be followed', async () => {
     const res = await chai.request(app)
       .delete('/api/v1/profiles/Mofe/follow')
       .set({ Authorization: `Bearer ${userToken}` });
     expect(res).to.have.status(409);
-    expect(res.body.message).to.equal('Cannot follow self');
+    expect(res.body.message).to.equal('Cannot unfollow self');
   });
 });
 describe('User can get followers', () => {

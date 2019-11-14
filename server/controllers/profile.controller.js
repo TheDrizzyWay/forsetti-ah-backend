@@ -134,11 +134,11 @@ class ProfileController {
       return Response(res, 404, 'User does not exist');
     }
     if (follower.id === followee.id) {
-      return Response(res, 409, 'Cannot follow self');
+      return Response(res, 409, 'Cannot unfollow self');
     }
     const unfollow = await followee.removeFollowers(follower);
     if (!unfollow) {
-      return Response(res, 400, 'Cannot follow user twice');
+      return Response(res, 400, 'Cannot unfollow user twice');
     }
     const followers = await followee.getFollowers();
     const user = {
