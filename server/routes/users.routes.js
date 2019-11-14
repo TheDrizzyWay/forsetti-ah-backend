@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { UserController, BookmarkController } from '../controllers';
-import { UserValidation, Authorization } from '../middleware';
-import { tryCatch, UuidValidator } from '../utils';
+import { UserValidation, Authorization, UuidValidator } from '../middleware';
+import { tryCatch } from '../utils';
 
 const { updateUserRole, getUsers } = UserController;
 const { getUserBookmark } = BookmarkController;

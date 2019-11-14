@@ -1,7 +1,7 @@
+import sequelize from 'sequelize';
 import db from '../models';
 import slugify from '../utils/slugify.utils';
 import {
-  verifyToken,
   Response,
   mailTemplate,
   sendMail,
@@ -10,28 +10,28 @@ import {
   readTime,
 } from '../utils';
 
+const { Op } = sequelize;
 const { getArticleRating } = Rating;
 const {
   Article, User, Comment, Readstat, Tag, ArticleTag, Clap, DraftComment, Bookmark
 } = db;
+
 /**
  * Article Controller
  * @package Article
  */
 class ArticleController {
-  static async createArticle(req, res) {
-    /**
+  /**
      * @description - Controller for create an article endpoint
-     *
      * @static
-     * @param {object} request
-     * @param {object} response
-     * @returns {object}
-     * @memberof createArticle
+     * @param {object} req
+     * @param {object} res
+     * @returns {object} article
     */
+  static async createArticle(req, res) {
     if (req.file) req.body.image = req.file.secure_url;
     const {
-      title, body, tagList, image, description, published, slug
+      title, body, tagList, image, description, published
     } = req.body;
     const publishedBoolean = !!published;
 
@@ -49,6 +49,7 @@ class ArticleController {
       slug: slugify(`${title} ${Date.now()}`),
       userId: id
     });
+
     if (tags) {
       let insertTags = tags.map(async (newTags) => {
         const newtag = await Tag.findOrCreate({ where: { name: newTags } });
@@ -56,9 +57,9 @@ class ArticleController {
       });
 
       insertTags = await Promise.all(insertTags);
-
       await article.addTags(insertTags);
     }
+
     const {
       dataValues: {
         firstname,
@@ -215,16 +216,10 @@ class ArticleController {
       user: { id }
     } = req;
     const {
-      dataValues: {
-        firstname,
-        lastname
-      }
+      dataValues: { firstname, lastname }
     } = await User.findOne({ where: { id } });
-    const {
-      dataValues: {
-        title
-      }
-    } = await Article.findOne({ where: { slug } });
+    const { dataValues: { title } } = await Article.findOne({ where: { slug } });
+
     const message = `<p>
                     ${firstname} ${lastname} shared this article <b>${title}</b> on Author's Haven,
                   </p>
@@ -293,22 +288,19 @@ class ArticleController {
     ]);
 
     let userBookmarked = false;
-    let decoded;
 
-    const { authorization } = req.headers;
-    if (authorization) {
-      const token = authorization.split(' ')[1];
-      decoded = await verifyToken(token);
+    if (req.user) {
       await Readstat.findOrCreate({
-        where: { userId: decoded.id },
+        where: { userId: req.user.id },
         defaults: {
-          userId: decoded.id,
+          userId: req.user.id,
           articleId: id,
           slug,
         },
       });
+
       const userBookmark = await Bookmark.findOne({
-        where: { userId: decoded.id, articleId: id }
+        where: { userId: req.user.id, articleId: id }
       });
 
       if (userBookmark) userBookmarked = true;
@@ -397,7 +389,7 @@ class ArticleController {
     return Response(res, 200, 'Tags successfully retrieved', { tags });
   }
 
-  /*
+  /**
    * @description Get top rated articles controller
    * @param {Object} req
    * @param {Object} res
@@ -444,6 +436,43 @@ class ArticleController {
     const rateResponse = await Promise.all(rate);
     const response = rateResponse.sort((a, b) => b.ratings - a.ratings);
     return Response(res, 200, 'Retrieved all top rated articles feed', { article: response });
+  }
+
+  /**
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} response
+   */
+  static async searchArticles(req, res) {
+    const queryKeys = Object.keys(req.query);
+    const queryValues = Object.values(req.query);
+    let counter = 0;
+    const searchObject = {};
+
+    queryKeys.forEach(async (key) => {
+      if (key === 'author') {
+        const user = await User.findOne({
+          where: { username: { [Op.iLike]: `%${queryValues[counter]}%` } }
+        });
+        searchObject.userId = user ? user.dataValues.id : null;
+      }
+      if (key === 'tag') {
+        searchObject.tagList = { [Op.contains]: [queryValues[counter].toLowerCase()] };
+      }
+      if (key === 'title') {
+        searchObject.title = { [Op.iLike]: `%${queryValues[counter]}%` };
+      }
+      counter += 1;
+      if (counter === queryKeys.length) {
+        const result = await Article.findAndCountAll({
+          where: {
+            [Op.or]: searchObject
+          }
+        });
+        if (result.count === 0) return Response(res, 404, 'Search result not found');
+        return Response(res, 200, 'Article found.', result);
+      }
+    });
   }
 }
 

@@ -1,7 +1,11 @@
 import UserValidation from './user-validation';
 import Authorization from './authorization';
+import UuidValidator from './uuid-validator';
+import ArticleValidation from './article-validation';
 
 export {
   UserValidation,
-  Authorization
+  Authorization,
+  UuidValidator,
+  ArticleValidation
 };

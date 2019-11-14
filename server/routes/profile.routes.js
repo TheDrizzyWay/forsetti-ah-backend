@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { ProfileController } from '../controllers';
-import { tryCatch, UuidValidator, imageUpload } from '../utils';
-import { UserValidation, Authorization } from '../middleware';
+import { tryCatch } from '../utils';
+import { UserValidation, Authorization, UuidValidator } from '../middleware';
+import imageUpload from '../services/cloudinary.service';
 
 const {
   followUser,
