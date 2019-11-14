@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    environment:
+      CC_TEST_REPORTER_ID: d2e3c8a68a37b7d71ce3f4bb067fd2ae784fb47d2d7be162d853d5b790e15df1
     docker:
       - image: circleci/node:8
         environment:
@@ -48,4 +50,4 @@ jobs:
           command: |
             ./cc-test-reporter before-build
             npm test -- --coverage
-            ./cc-test-reporter after-build --exit-code $?
+            ./cc-test-reporter after-build --coverage-input-type clover --exit-code $?
