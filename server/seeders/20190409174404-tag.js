@@ -6,7 +6,7 @@ module.exports = {
       name: 'social',
     }, {
       id: 'ae79232b-bc94-42ca-9dec-30a39edf87e9',
-      name: 'politics',
+      name: 'tech',
     }], {}),
 
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Tags', null, {})

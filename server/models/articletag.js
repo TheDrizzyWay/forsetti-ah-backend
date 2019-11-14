@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const ArticleTag = sequelize.define('ArticleTag', {
     tagId: DataTypes.UUID,

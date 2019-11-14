@@ -20,7 +20,7 @@ before(async () => {
 describe('User post comment route', () => {
   it('should post a comment to an article', async () => {
     const res = await chai.request(app)
-      .post('/api/v1/article/the-boy-drank-palm-wine-3456677788/comment')
+      .post('/api/v1/article/howquantumteleportationworks-12345678/comment')
       .set({ Authorization: `Bearer ${userToken}` })
       .send({ comment: 'This is a valid comment' });
     ({ id } = res.body.data.comment);
@@ -76,7 +76,7 @@ describe('User post comment route', () => {
 describe('User Threaded comments', () => {
   it('should post a comment to an article', async () => {
     const res = await chai.request(app)
-      .post(`/api/v1/article/the-boy-drank-palm-wine-3456677788/comment/${id}/thread`)
+      .post(`/api/v1/article/howquantumteleportationworks-12345678/comment/${id}/thread`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({ comment: 'This is a valid sub comment' });
     expect(res).to.have.status(201);
@@ -235,7 +235,7 @@ describe('Delete comments', () => {
 
   it('should delete a comment and thread comments', async () => {
     const res = await chai.request(app)
-      .delete('/api/v1/article/the-boy-drank-palm-wine-3456677788/comment/f24afaca-a55f-44c3-9705-539f36fd8f45')
+      .delete('/api/v1/article/howquantumteleportationworks-12345678/comment/f24afaca-a55f-44c3-9705-539f36fd8f45')
       .set({ Authorization: `Bearer ${userToken}` });
 
     expect(res).to.have.status(200);

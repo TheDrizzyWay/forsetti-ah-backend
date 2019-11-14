@@ -24,40 +24,30 @@ const { checkComments, validateCommentType, checkUser } = CommentValidation;
 const {
   createArticle, editArticle, getOneArticle,
   shareArticle, deleteArticle, getAllTags,
-  getTopArticle, searchArticles
+  getTopArticle, searchArticles, getAllArticles
 } = ArticleController;
 const { validArticleId, validCommentId, validId } = UuidValidator;
 const { signInAuth } = Authorization;
 
 const router = new Router();
 
-router.delete('/:slug', [signInAuth, checkArticleExist, checkAuthor, deleteImage], tryCatch(deleteArticle));
 router.get('/search', [checkQueryParams, checkSpecialChars], tryCatch(searchArticles));
 router.get('/topfeed', tryCatch(getTopArticle));
-
 router.get('/tags', tryCatch(getAllTags));
 
 router.get('/:slug', tryCatch(getOneArticle));
-
 router.post('/', [signInAuth, imageUpload, validCreateArticle], tryCatch(createArticle));
+router.get('/', [paramsValidate], tryCatch(getAllArticles));
+router.put('/:slug', [signInAuth, imageUpload, checkArticleExist, checkAuthor, updateArticle], tryCatch(editArticle));
+router.delete('/:slug', [signInAuth, checkArticleExist, checkAuthor, deleteImage], tryCatch(deleteArticle));
 
 router.post('/:slug/comment', [signInAuth, checkComments, verifyText, validateCommentType], tryCatch(createComments));
-
 router.post('/:slug/comment/:commentid/thread', [signInAuth, checkComments, validateCommentType], tryCatch(threadedComment));
-
-router.get('/', [paramsValidate], tryCatch(ArticleController.getAllArticles));
-
 router.delete('/:slug/comment/:commentId', [signInAuth, validCommentId], tryCatch(deleteComment));
+router.put('/:slug/comment/:id', [signInAuth, validId, checkComments, checkUser], tryCatch(editComment));
 
 router.post('/:articleId/claps', [signInAuth, validArticleId], tryCatch(ClapController.createClap));
-router.get('/', tryCatch(ArticleController.getAllArticles));
-
 router.post('/:articleId/bookmark', [signInAuth, validArticleId], tryCatch(createOrRemoveBookmark));
-
-router.put('/:slug', [signInAuth, imageUpload, checkArticleExist, checkAuthor, updateArticle], tryCatch(editArticle));
-
 router.post('/:slug/share', [signInAuth, shareArticleCheck, checkArticleExist], tryCatch(shareArticle));
-
-router.put('/:slug/comment/:id', [signInAuth, validId, checkComments, checkUser], tryCatch(editComment));
 
 export default router;

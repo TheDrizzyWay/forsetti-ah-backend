@@ -205,7 +205,7 @@ describe('Articles routes', () => {
 
     it('should get the article if user is not logged in', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/Gildard is working on it-12345678');
+        .get('/api/v1/article/thewonderfulworldofinsects-12345678');
 
       expect(res).to.have.status(200);
       expect(res.body.message).to.be.equal('Article found.');
@@ -214,7 +214,7 @@ describe('Articles routes', () => {
 
     it('should get the article if the user is logged in', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/Gildard is working on it-12345678')
+        .get('/api/v1/article/thewonderfulworldofinsects-12345678')
         .set({ Authorization: `Bearer ${userToken}` });
 
       expect(res).to.have.status(200);
@@ -410,7 +410,7 @@ describe('Article email share', () => {
 });
 
 describe('Delete Article', () => {
-  const validSlug = 'the-fattest-girl-3654677788';
+  const validSlug = 'catscnnottastesweets-3654677788';
   const fakeSlug = 'David is so annoying it-12345678';
 
   it('should check if the user is the author of the article', async () => {

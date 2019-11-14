@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const DraftComment = sequelize.define('DraftComment', {
     id: {
