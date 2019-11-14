@@ -1,10 +1,6 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import Response from './response.util';
-
-dotenv.config();
-
-const { JWT_SECRET } = process.env;
+import { jwtSecret } from '../config/variables';
 
 /**
  * Generates a JWT token
@@ -13,7 +9,7 @@ const { JWT_SECRET } = process.env;
  * @returns {string} token
  */
 const generateToken = async (data, expires) => {
-  const token = await jwt.sign(data, JWT_SECRET, { expiresIn: expires });
+  const token = await jwt.sign(data, jwtSecret, { expiresIn: expires });
   return token;
 };
 
@@ -23,7 +19,7 @@ const generateToken = async (data, expires) => {
  * @param {Object} res
  * @returns {object} userdata
  */
-const verifyToken = async (token, res) => jwt.verify(token, JWT_SECRET, (err, decoded) => {
+const verifyToken = async (token, res) => jwt.verify(token, jwtSecret, (err, decoded) => {
   if (err) {
     return Response(res, 401, err.message);
   }
