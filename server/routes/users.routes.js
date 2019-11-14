@@ -1,4 +1,4 @@
-import express, { Router } from 'express';
+import { Router } from 'express';
 import { UserController, BookmarkController } from '../controllers';
 import { UserValidation, Authorization } from '../middleware';
 import { tryCatch, UuidValidator } from '../utils';
