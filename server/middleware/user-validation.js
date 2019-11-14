@@ -1,12 +1,7 @@
 import validator from 'validator';
-import db from '../models';
-import Response from '../utils/response.util';
-import isEmpty from '../utils/isEmpty.util';
-import isRequired from '../utils/isRequired.util';
-
-const {
-  User
-} = db;
+import {
+  Response, isEmpty, isRequired, findUser
+} from '../utils';
 
 /**
  * User validation class
@@ -31,14 +26,8 @@ class UserValidation {
    * @returns {Object} response
    */
   static async userExist(req, res, next) {
-    const {
-      email,
-    } = req.body;
-    const checkuser = await User.findOne({
-      where: {
-        email: email.toLowerCase(),
-      },
-    });
+    const { email } = req.body;
+    const checkuser = await findUser({ email: email.toLowerCase() });
     if (checkuser) {
       return Response(res, 409, `User with email: ${email} already exist!`);
     }
@@ -119,11 +108,8 @@ class UserValidation {
     if (Object.keys(errObj).length !== 0) {
       return Response(res, 400, errObj);
     }
-    const checkuser = await User.findOne({
-      where: {
-        email
-      }
-    });
+
+    const checkuser = await findUser({ email });
     if (!checkuser) {
       const message = `User with email ${email} does not exist`;
       return Response(res, 404, message);
@@ -197,7 +183,7 @@ class UserValidation {
 
     try {
       if (username) {
-        const findUserName = await User.findOne({ where: { username } });
+        const findUserName = await findUser({ username });
         if (findUserName && findUserName.dataValues.id !== id) {
           return Response(res, 409, 'This username is already taken.');
         }
@@ -228,7 +214,7 @@ class UserValidation {
     const validUsername = validator.isAlphanumeric(username);
     if (!validUsername) errObj.username = 'user name should only be alphanumeric';
     if (username) {
-      const findUserName = await User.findOne({ where: { username } });
+      const findUserName = await findUser({ username });
       if (findUserName) errObj.UsernameExist = 'username is already taken.';
     }
     if (Object.keys(errObj).length !== 0) {

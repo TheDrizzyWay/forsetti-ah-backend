@@ -20,6 +20,9 @@ import SearchValidators from './articles/article-search.utils';
 import deleteImage from './articles/deleteImage.util';
 import commentIdValidator from './commentidvalidator.util';
 import readTime from './readTime.util';
+import findUser from './find-user.util';
+import isEmpty from './isEmpty.util';
+import isRequired from './isRequired.util';
 
 const { checkComments, validateCommentType, checkUser } = commentValidator;
 
@@ -70,4 +73,7 @@ export {
   commentIdValidator,
   checkUser,
   readTime,
+  findUser,
+  isEmpty,
+  isRequired
 };

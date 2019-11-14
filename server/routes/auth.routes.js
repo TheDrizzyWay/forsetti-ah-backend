@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { UserController, AuthController } from '../controllers';
+import { AuthController } from '../controllers';
 import { UserValidation } from '../middleware';
 import tryCatch from '../utils/trycatch.util';
 
@@ -13,15 +13,15 @@ const {
   checkUsername
 } = UserValidation;
 
-const { socialRedirect } = UserController;
+const { socialRedirect, forgotPassword, resetPassword } = AuthController;
 
 const router = new Router();
 
 router.post('/signup', [checkUsername, userSignup, userExist], tryCatch(AuthController.signup));
 router.post('/login', [isSigninFieldEmpty], tryCatch(AuthController.signinUser));
 
-router.post('/forgotpassword', [userNotExist], tryCatch(UserController.forgotPassword));
-router.put('/resetpassword', [checkPassword], tryCatch(UserController.resetPassword));
+router.post('/forgotpassword', [userNotExist], tryCatch(forgotPassword));
+router.put('/resetpassword', [checkPassword], tryCatch(resetPassword));
 
 router.get('/facebook', passport.authenticate('facebook', { scope: ['email'] }));
 router.get('/facebook/callback', passport.authenticate('facebook', { session: false }), socialRedirect);
