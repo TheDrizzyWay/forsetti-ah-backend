@@ -5,7 +5,6 @@ import ProfileController from './profile.controller';
 import ArticleController from './article.controller';
 import ClapController from './clap.controller';
 import BookmarkController from './bookmark.contoller';
-import SearchControllers from './article-search-controller';
 
 export {
   UserController,
@@ -14,6 +13,5 @@ export {
   ArticleController,
   CommentController,
   BookmarkController,
-  ClapController,
-  SearchControllers
+  ClapController
 };

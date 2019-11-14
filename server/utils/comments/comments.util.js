@@ -1,7 +1,5 @@
 import validator from 'validator';
-
 import db from '../../models';
-
 import Response from '../response.util';
 
 const { Comment } = db;
