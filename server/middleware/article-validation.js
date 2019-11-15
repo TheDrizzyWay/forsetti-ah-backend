@@ -1,6 +1,5 @@
 import validator from 'validator';
-import Response from '../utils/response.util';
-import isRequired from '../utils/isRequired.util';
+import { Response, isRequired } from '../utils';
 import baseUtils from '../utils/articles/base.util';
 import db from '../models';
 

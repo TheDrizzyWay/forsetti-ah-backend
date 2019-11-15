@@ -1,5 +1,5 @@
 import db from '../models';
-import Response from '../utils/response.util';
+import { Response } from '../utils';
 
 const { Clap, Article } = db;
 /**

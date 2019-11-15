@@ -1,6 +1,5 @@
 import sequelize from 'sequelize';
 import db from '../models';
-import slugify from '../utils/slugify.utils';
 import {
   Response,
   mailTemplate,
@@ -8,6 +7,7 @@ import {
   Rating,
   newArticleMail,
   readTime,
+  slugify
 } from '../utils';
 
 const { Op } = sequelize;

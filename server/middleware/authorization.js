@@ -1,4 +1,4 @@
-import { verifyToken, Response } from '../utils/index';
+import { verifyToken, Response } from '../utils';
 
 /**
  * Authorization class

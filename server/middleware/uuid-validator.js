@@ -1,5 +1,5 @@
 import isUUID from 'validator/lib/isUUID';
-import Response from '../utils/response.util';
+import { Response } from '../utils';
 
 /**
  * @description Checks if an id is valid

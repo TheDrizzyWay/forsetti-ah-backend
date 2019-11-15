@@ -15,6 +15,7 @@ import readTime from './readTime.util';
 import findUser from './find-user.util';
 import isEmpty from './isEmpty.util';
 import isRequired from './isRequired.util';
+import slugify from './slugify.util';
 
 const { verifyText } = verifyHighlightedText;
 
@@ -36,5 +37,6 @@ export {
   readTime,
   findUser,
   isEmpty,
-  isRequired
+  isRequired,
+  slugify
 };
