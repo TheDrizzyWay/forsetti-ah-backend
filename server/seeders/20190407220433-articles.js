@@ -49,7 +49,7 @@ module.exports = {
       body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim ac nulla ut pulvinar',
       description: 'Go to the ant you sluggard',
       readingTime: '0.003',
-      userId: '3d1c5f17-7580-4cea-8647-99e7440c5d43',
+      userId: '7139d3af-b8b4-44f6-a49f-9305791700f4',
       image: 'https://res.cloudinary.com/forsetti/image/upload/v1554746740/forsetti/b9leichyadygoqudemre.jpg',
       published: true,
     },
@@ -62,6 +62,7 @@ module.exports = {
       readingTime: '0.003',
       published: true,
       tagList: ['tech', 'social'],
+      userId: '3d1c5f17-7580-4cea-8647-99e7440c5d43',
       image: 'https://res.cloudinary.com/forsetti/image/upload/v1554746740/forsetti/b9leichyadygoqudemre.jpg'
     },
     {
