@@ -366,49 +366,6 @@ describe('User can edit article', () => {
   });
 });
 
-describe('Article email share', () => {
-  const validSlug = 'Gildard is working on it-12345678';
-  const fakeSlug = 'David is so annoying it-12345678';
-
-  it('should return 422 if email is not present', async () => {
-    const res = await chai.request(app)
-      .post(`/api/v1/article/${validSlug}/share`)
-      .set({ Authorization: `Bearer ${userToken}` })
-      .send(mockDataShare.invalidShareObject[0]);
-
-    expect(res).to.have.status(422);
-    expect(res.body).to.have.property('message').eql('Email is invalid');
-  });
-
-  it('should return 422 if email is invalid', async () => {
-    const res = await chai.request(app)
-      .post(`/api/v1/article/${validSlug}/share`)
-      .set({ Authorization: `Bearer ${userToken}` })
-      .send(mockDataShare.invalidShareObject[1]);
-
-    expect(res).to.have.status(422);
-    expect(res.body).to.have.property('message').eql('Email is invalid');
-  });
-
-  it('should return 404 if the article does not exist', async () => {
-    const res = await chai.request(app)
-      .post(`/api/v1/article/${fakeSlug}/share`)
-      .set({ Authorization: `Bearer ${userToken}` })
-      .send(mockDataShare.validShareObject);
-    expect(res).to.have.status(404);
-    expect(res.body).to.have.property('message').eql('Article not found');
-  });
-
-  it('should return 200 if mail was shared successfully', async () => {
-    const res = await chai.request(app)
-      .post(`/api/v1/article/${validSlug}/share`)
-      .set({ Authorization: `Bearer ${userToken}` })
-      .send(mockDataShare.validShareObject);
-    expect(res).to.have.status(200);
-    expect(res.body).to.have.property('message').eql('Article shared successfully');
-  });
-});
-
 describe('Delete Article', () => {
   const validSlug = 'catscnnottastesweets-3654677788';
   const fakeSlug = 'David is so annoying it-12345678';

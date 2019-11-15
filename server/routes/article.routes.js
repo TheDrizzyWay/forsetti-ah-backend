@@ -17,14 +17,14 @@ const {
 const { createOrRemoveBookmark } = BookmarkController;
 const {
   validCreateArticle, updateArticle, checkArticleExist,
-  checkAuthor, shareArticleCheck, paramsValidate,
-  checkQueryParams, checkSpecialChars
+  checkAuthor, paramsValidate, checkQueryParams,
+  checkSpecialChars
 } = ArticleValidation;
 const { checkComments, validateCommentType, checkUser } = CommentValidation;
 const {
   createArticle, editArticle, getOneArticle,
-  shareArticle, deleteArticle, getAllTags,
-  getTopArticle, searchArticles, getAllArticles
+  deleteArticle, getAllTags, getTopArticle,
+  searchArticles, getAllArticles
 } = ArticleController;
 const { validArticleId, validCommentId, validId } = UuidValidator;
 const { signInAuth } = Authorization;
@@ -48,6 +48,5 @@ router.put('/:slug/comment/:id', [signInAuth, validId, checkComments, checkUser]
 
 router.post('/:articleId/claps', [signInAuth, validArticleId], tryCatch(ClapController.createClap));
 router.post('/:articleId/bookmark', [signInAuth, validArticleId], tryCatch(createOrRemoveBookmark));
-router.post('/:slug/share', [signInAuth, shareArticleCheck, checkArticleExist], tryCatch(shareArticle));
 
 export default router;
