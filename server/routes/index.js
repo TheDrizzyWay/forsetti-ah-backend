@@ -8,11 +8,11 @@ const router = express.Router();
 
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
-router.use('/article', articleRoutes);
+router.use('/articles', articleRoutes);
 router.use('/profiles', profileRoutes);
 
 router.use('*', (req, res) => {
-  res.status(200).json({ message: 'Welcome to forsetti-ah-backend API' });
+  res.status(200).json({ message: 'Welcome to forsetti-ah-backend API. If you get lost, use the docs.' });
 });
 
 export default router;

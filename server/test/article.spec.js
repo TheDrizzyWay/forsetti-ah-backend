@@ -2,8 +2,6 @@ import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../index';
 import articleMockData from './stubs/mock-data.article';
-import mockDataShare from './stubs/mock-data.share';
-
 
 chai.use(chaiHttp);
 let userToken;
@@ -23,10 +21,10 @@ describe('Articles routes', () => {
 
     userToken = userResponse.body.data.token;
   });
-  describe('POST /api/v1/article', () => {
+  describe('POST /api/v1/articles', () => {
     it('should successfullly create an article', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.validArticleObject);
       expect(res).to.have.status(201);
@@ -43,7 +41,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if title is not in the request data', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[0]);
       const { message } = res.body;
@@ -52,7 +50,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if title is not more than eight characters', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[1]);
       const { message } = res.body;
@@ -61,7 +59,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if title is not a string', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[2]);
       const { message } = res.body;
@@ -71,7 +69,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if body is not in the request data', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[3]);
       const { message } = res.body;
@@ -80,7 +78,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if body is not more than eight characters', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[4]);
       const { message } = res.body;
@@ -89,7 +87,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if body is not a string', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[5]);
       const { message } = res.body;
@@ -99,7 +97,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if description is not in the request data', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[6]);
       const { message } = res.body;
@@ -108,7 +106,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if description is not more than eight characters', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[7]);
       const { message } = res.body;
@@ -117,7 +115,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if description is not a string', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[8]);
       const { message } = res.body;
@@ -127,7 +125,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if tagList is not an array', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[12]);
       const { message } = res.body;
@@ -137,7 +135,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if tags array contains a data that is not a string', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[13]);
       const { message } = res.body;
@@ -147,7 +145,7 @@ describe('Articles routes', () => {
     });
     it('should return 422 if tags array contains a data that is empty', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[9]);
       const { message } = res.body;
@@ -158,7 +156,7 @@ describe('Articles routes', () => {
 
     it('should return 422 if all required field is not set in the request data', async () => {
       const res = await chai.request(app)
-        .post('/api/v1/article')
+        .post('/api/v1/articles')
         .set({ Authorization: `Bearer ${userToken}` })
         .send(articleMockData.invalidObject[11]);
       const { message } = res.body;
@@ -170,7 +168,7 @@ describe('Articles routes', () => {
   describe('GET /api/v1/article', () => {
     it('it should get all articles', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/?page=1');
+        .get('/api/v1/articles/?page=1');
       const { message } = res.body;
       expect(res).to.have.status(200);
       expect(message).to.be.equal('Articles successfully retrieved');
@@ -179,24 +177,24 @@ describe('Articles routes', () => {
     });
     it('it should return error if no more articles on page', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/?page=5');
+        .get('/api/v1/articles/?page=5');
       const { status, message } = res.body;
       expect(message).to.be.equal('There are no articles here');
       expect(status).to.be.equal(404);
     });
     it('it should return error if wrong params is passed', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/?page=g');
+        .get('/api/v1/articles/?page=g');
       const { status, message } = res.body;
       expect(message).to.be.equal('Invalid id');
       expect(status).to.be.equal(422);
     });
   });
 
-  describe('GET /api/v1/article/:slug', () => {
+  describe('GET /api/v1/articles/:slug', () => {
     it('should return 404 if article is not found', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/wrong-slug');
+        .get('/api/v1/articles/wrong-slug');
 
       expect(res).to.have.status(404);
       expect(res.body).to.be.a('object');
@@ -205,7 +203,7 @@ describe('Articles routes', () => {
 
     it('should get the article if user is not logged in', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/thewonderfulworldofinsects-12345678');
+        .get('/api/v1/articles/thewonderfulworldofinsects-12345678');
 
       expect(res).to.have.status(200);
       expect(res.body.message).to.be.equal('Article found.');
@@ -214,7 +212,7 @@ describe('Articles routes', () => {
 
     it('should get the article if the user is logged in', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/article/thewonderfulworldofinsects-12345678')
+        .get('/api/v1/articles/thewonderfulworldofinsects-12345678')
         .set({ Authorization: `Bearer ${userToken}` });
 
       expect(res).to.have.status(200);
@@ -238,7 +236,7 @@ describe('User can edit article', () => {
   });
   it('should return 200 when editing article', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: 'This is a description from test',
@@ -251,7 +249,7 @@ describe('User can edit article', () => {
   });
   it('should return 200 when editing article with tags', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: 'This is a description from test',
@@ -265,7 +263,7 @@ describe('User can edit article', () => {
   });
   it('should return 404 when article does not exist', async () => {
     const res = await chai.request(app)
-      .put('/api/v1/article/this-is-a-test-for-articles-1554903984790')
+      .put('/api/v1/articles/this-is-a-test-for-articles-1554903984790')
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: 'This is a description from test',
@@ -278,7 +276,7 @@ describe('User can edit article', () => {
   });
   it('should return 422 when description is empty', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: '   ',
@@ -291,7 +289,7 @@ describe('User can edit article', () => {
   });
   it('should check if description not sent', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         title: 'This is a title from test',
@@ -303,7 +301,7 @@ describe('User can edit article', () => {
   });
   it('should return 422 when title is empty', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: 'This is a description from test',
@@ -316,7 +314,7 @@ describe('User can edit article', () => {
   });
   it('should check if title not sent', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: 'This is a description from test',
@@ -328,7 +326,7 @@ describe('User can edit article', () => {
   });
   it('should return 422 when body is empty', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: 'This is a description from test',
@@ -341,7 +339,7 @@ describe('User can edit article', () => {
   });
   it('should check if body not sent', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${userToken}` })
       .send({
         description: 'This is a description from test',
@@ -353,7 +351,7 @@ describe('User can edit article', () => {
   });
   it('should return 400 when a user is not author an article ', async () => {
     const res = await chai.request(app)
-      .put(`/api/v1/article/${slug}`)
+      .put(`/api/v1/articles/${slug}`)
       .set({ Authorization: `Bearer ${alternateToken}` })
       .send({
         description: 'This is a description from test',
@@ -372,7 +370,7 @@ describe('Delete Article', () => {
 
   it('should check if the user is the author of the article', async () => {
     const res = await chai.request(app)
-      .delete(`/api/v1/article/${validSlug}`)
+      .delete(`/api/v1/articles/${validSlug}`)
       .set({ Authorization: `Bearer ${alternateToken}` });
     expect(res).to.have.status(401);
     expect(res.body.message).to.eql('Action restricted to author of article');
@@ -380,7 +378,7 @@ describe('Delete Article', () => {
 
   it('should successfully delete an article', async () => {
     const res = await chai.request(app)
-      .delete(`/api/v1/article/${validSlug}`)
+      .delete(`/api/v1/articles/${validSlug}`)
       .set({ Authorization: `Bearer ${userToken}` });
     expect(res).to.have.status(200);
     expect(res.body.message).to.be.a('string');
@@ -388,7 +386,7 @@ describe('Delete Article', () => {
 
   it('should check if the article exists', async () => {
     const res = await chai.request(app)
-      .delete(`/api/v1/article/${fakeSlug}`)
+      .delete(`/api/v1/articles/${fakeSlug}`)
       .set({ Authorization: `Bearer ${userToken}` });
     expect(res).to.have.status(404);
     expect(res.body.message).to.eql('Article not found');
@@ -398,7 +396,7 @@ describe('Delete Article', () => {
 describe('Get All Tags', () => {
   it('it should successfully get all tags', async () => {
     const res = await chai.request(app)
-      .get('/api/v1/article/tags');
+      .get('/api/v1/articles/tags');
     expect(res).to.have.status(200);
     expect(res.body.data).to.have.property('tags');
     expect(res.body.data.tags).to.be.an('object');
@@ -409,7 +407,7 @@ describe('Get All Tags', () => {
 describe('Get top rated articles feed', () => {
   it('should return 200 for list of top rated articles', async () => {
     const res = await chai.request(app)
-      .get('/api/v1/article/topfeed')
+      .get('/api/v1/articles/topfeed')
       .set({ Authorization: `Bearer ${userToken}` });
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('message').eql('Retrieved all top rated articles feed');

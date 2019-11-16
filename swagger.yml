@@ -440,7 +440,7 @@ paths:
         503:
           description: "Some error occurred. Please try again"
 
-  /article/:slug/comment/:commentId:
+  /articles/:slug/comment/:commentId:
     delete:
       summary: Handles deleting a comment
       description: Deletes a comment and it's thread comments from the database
@@ -479,7 +479,7 @@ paths:
             status: 401
             error: Access Denied. Please Log In.
   
-  /article:
+  /articles:
     post:
       tags:
       - "Articles"
@@ -556,7 +556,7 @@ paths:
                         username: mofe002
                         bio: 'This is my bio .'
                         image: null
-  /article/search:
+  /articles/search:
     post:
       tags:
       - Articles
@@ -597,7 +597,7 @@ paths:
           example:
             status: 404
             message: "Search result not found"
-  /article/:slug:
+  /articles/:slug:
     get:
       summary: Get one article
       description: Gets one article from the database
@@ -756,7 +756,7 @@ paths:
             message: "Only the user of this comment can edit comment"
          503:
           description: "Some error occurred. Please try again"
-  /article/:articleId/bookmark:
+  /articles/:articleId/bookmark:
     post:
       tags:
       - Articles
@@ -798,7 +798,7 @@ paths:
             message: "Bookmark successfully removed"
         503:
           description: "Some error occurred. Please try again"
-  /article/bookmark:
+  /articles/bookmark:
     get:
       tags:
       - Articles
@@ -838,7 +838,7 @@ paths:
                        email: 's.david@example.com'
         503:
           description: "Some error occurred. Please try again"
-  /article/topfeed:
+  /articles/topfeed:
     get:
       tags:
       - Articles
@@ -874,42 +874,8 @@ paths:
                       
         503:
           description: "Some error occurred. Please try again"
-  /article/share/:slug:
-    post:
-      tags:
-      - Articles
-      summary: "User can share an article via email"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      security:
-       - Bearer: []
-      parameters:
-      - in: body
-        name: "email"
-        description: "Recipient Email "
-        required: true
-      - in: path
-        name: "slug"
-        description: "Article slug"
-        required: true
-        schema:
-          $ref: "#/definitions/Share"
-      responses:
-        200:
-          description: "user can share an article via email"
-          example:
-            status: 200
-            message: "Article shared successfully"
-        404:
-          description: "article not found"
-          example:
-            status: 404
-            message: "Article not found"
-        503:
-          description: "Some error occurred. Please try again"
-  /article/:articleId/claps:
+
+  /articles/:articleId/claps:
     post:
       tags:
       - Articles
@@ -1085,7 +1051,7 @@ paths:
           example:
             status: 409
             message: "You cannot unfollow yourself"
-  /article/tags:
+  /articles/tags:
     get:
       tags:
       - "Articles"

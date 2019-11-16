@@ -35,7 +35,7 @@ describe('Articles routes', () => {
     describe('POST /api/v1/', () => {
       it('an author should not be able to clap for himself', async () => {
         const res = await chai.request(app)
-          .post('/api/v1/article/8ec9d2a8-89c0-4af5-9406-240eb9fc1746/claps')
+          .post('/api/v1/articles/8ec9d2a8-89c0-4af5-9406-240eb9fc1746/claps')
           .set({ Authorization: `Bearer ${userToken}` });
         expect(res).to.have.property('status').eql(400);
         expect(res.body).to.have.property('message').eql('you cannot clap for yourself');
@@ -45,7 +45,7 @@ describe('Articles routes', () => {
     describe('POST /api/v1/', () => {
       it('should successfullly clap for an article', async () => {
         const res = await chai.request(app)
-          .post('/api/v1/article/8ec9d2a8-89c0-4af5-9406-240eb9fc1746/claps')
+          .post('/api/v1/articles/8ec9d2a8-89c0-4af5-9406-240eb9fc1746/claps')
           .set({ Authorization: `Bearer ${userToken2}` });
         expect(res).to.have.status(201);
         const { clap } = res.body.data;

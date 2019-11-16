@@ -2,8 +2,6 @@ import sequelize from 'sequelize';
 import db from '../models';
 import {
   Response,
-  mailTemplate,
-  sendMail,
   Rating,
   newArticleMail,
   readTime,
@@ -168,7 +166,6 @@ class ArticleController {
   static async getAllArticles(req, res) {
     /**
      * @description - Controller to get all articles endpoint
-     *
      * @static
      * @param {object} request
      * @param {object} response
@@ -199,7 +196,7 @@ class ArticleController {
     if (page > pages) {
       return Response(res, 404, 'There are no articles here');
     }
-    articles.nextpage = page < pages ? 'true' : 'false';
+    articles.nextPage = page < pages;
     return Response(res, 200, 'Articles successfully retrieved', { articles, pages });
   }
 
@@ -322,9 +319,8 @@ class ArticleController {
     }
   }
 
-  /*
+  /**
    * Delete article
-   * description Get all tags
    * @param {object} req
    * @param {object} res
    * @returns {object} response
