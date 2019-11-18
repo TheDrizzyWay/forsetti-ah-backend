@@ -50,6 +50,7 @@ module.exports = {
       description: 'Go to the ant you sluggard',
       readingTime: '0.003',
       userId: '7139d3af-b8b4-44f6-a49f-9305791700f4',
+      tagList: ['nature'],
       image: 'https://res.cloudinary.com/thedrizzyway/image/upload/v1573857016/forsetti/insects.jpg',
       published: true,
     },

@@ -32,6 +32,31 @@ class Authorization {
   }
 
   /**
+ * @description Checks if a token exists but allows permission regardless
+ * @param {Object} req
+ * @param {Object} res
+ * @param {function} next
+ * @returns {Object} response
+ */
+  static async partialAuth(req, res, next) {
+    const { authorization } = req.headers;
+    if (authorization) {
+      const token = authorization.split(' ')[1];
+      if (!token) return next();
+
+      try {
+        const decoded = await verifyToken(token);
+        req.user = decoded;
+        next();
+      } catch (error) {
+        return Response(res, 401, 'Error in verification. Please try again');
+      }
+    } else {
+      next();
+    }
+  }
+
+  /**
  * @description Checks if the user has a role of superadmin
  * @param {Object} req
  * @param {Object} res

@@ -286,7 +286,7 @@ class ArticleController {
       readingTime,
       createdAt,
       updatedAt,
-      Bookmarked: userBookmarked
+      bookmarked: userBookmarked
     };
 
     const mainComments = articleProperties[1].rows;

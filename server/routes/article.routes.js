@@ -27,7 +27,7 @@ const {
   searchArticles, getAllArticles
 } = ArticleController;
 const { validArticleId, validCommentId, validId } = UuidValidator;
-const { signInAuth } = Authorization;
+const { signInAuth, partialAuth } = Authorization;
 
 const router = new Router();
 
@@ -35,7 +35,7 @@ router.get('/search', [checkQueryParams, checkSpecialChars], tryCatch(searchArti
 router.get('/topfeed', tryCatch(getTopArticle));
 router.get('/tags', tryCatch(getAllTags));
 
-router.get('/:slug', tryCatch(getOneArticle));
+router.get('/:slug', [partialAuth], tryCatch(getOneArticle));
 router.post('/', [signInAuth, imageUpload, validCreateArticle], tryCatch(createArticle));
 router.get('/', [paramsValidate], tryCatch(getAllArticles));
 router.put('/:slug', [signInAuth, imageUpload, checkArticleExist, checkAuthor, updateArticle], tryCatch(editArticle));
