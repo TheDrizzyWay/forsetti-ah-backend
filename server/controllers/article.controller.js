@@ -315,6 +315,7 @@ class ArticleController {
       });
     } else {
       articleObject.comments = '0 comments';
+      articleObject.commentCount = 0;
       return Response(res, 200, 'Article found.', [articleObject]);
     }
   }
