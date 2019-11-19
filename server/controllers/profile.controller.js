@@ -31,7 +31,7 @@ class ProfileController {
       }),
       Readstat.findAndCountAll({
         where: { userId: id },
-        attributes: ['articleId', 'slug', 'createdAt']
+        attributes: ['articleId', 'title', 'slug', 'createdAt']
       }),
       userProfile.getFollowers(),
       userProfile.getFollowings()

@@ -259,7 +259,8 @@ class ArticleController {
         defaults: {
           userId: req.user.id,
           articleId: id,
-          slug,
+          title,
+          slug
         },
       });
 
