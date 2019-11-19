@@ -9,7 +9,7 @@ describe('Email notification', () => {
     // Process email notification function for new article
     before(async () => {
       // IDs provided by seeded data
-      await newArticleMail('3d1c5f17-7580-4cea-8647-99e7440c5d43', 'Article test notification', 'Gildard is working on it-12345678', 'ddbc0491-f25b-44c1-a5df-25795fc7fada');
+      await newArticleMail('3d1c5f17-7580-4cea-8647-99e7440c5d43', 'How Quantum Teleportation Works', 'howquantumteleportationworks-12345678', 'ddbc0491-f25b-44c1-a5df-25795fc7fada');
     });
 
     it('notifications should be present in the database for a follower', async () => {

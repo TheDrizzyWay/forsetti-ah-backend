@@ -75,7 +75,7 @@ class ArticleController {
     if (!article) {
       return Response(res, 400, 'Article was not created successfully');
     }
-    await newArticleMail(id, title, article.slug, article.id);
+    if (publishedBoolean) await newArticleMail(id, title, article.slug, article.id);
     return Response(res, 201, 'Article successfully created', { article, author });
   }
 
@@ -133,11 +133,9 @@ class ArticleController {
       }
     } = await editInstance.getAuthor();
     const {
-      dataValues: {
-        createdAt,
-        updatedAt
-      }
+      dataValues: { createdAt, updatedAt }
     } = updatedArticle[1][0];
+
     const response = {
       article: {
         slug,
@@ -160,6 +158,7 @@ class ArticleController {
     if (!updatedArticle) {
       return Response(res, 400, 'Error editing article');
     }
+    if (publishedBoolean) await newArticleMail(id, title, slug, articleId);
     return Response(res, 200, 'Article edited successfully', response);
   }
 
