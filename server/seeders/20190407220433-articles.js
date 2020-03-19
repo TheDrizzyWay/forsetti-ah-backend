@@ -76,7 +76,31 @@ module.exports = {
       published: true,
       tagList: ['social'],
       userId: '7139d3af-b8b4-44f6-a49f-9305791700f4',
-      image: 'https://res.cloudinary.com/forsetti/image/upload/v1554746740/forsetti/b9leichyadygoqudemre.jpg',
+      image: 'https://res.cloudinary.com/thedrizzyway/image/upload/v1584623768/forsetti/photo-cat.jpg',
+    },
+    {
+      id: '5438bb14-4557-434b-a18f-1c792b15f02c',
+      title: "Suspected car thief tells police she's Beyonce Knowles",
+      slug: 'suspectedcarthief-3452679788',
+      body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      description: "Spoiler alert: she's not",
+      readingTime: '0.003',
+      published: true,
+      tagList: ['music', 'social'],
+      userId: '3d1c5f17-7580-4cea-8647-99e7440c5d43',
+      image: 'https://res.cloudinary.com/thedrizzyway/image/upload/v1584623768/forsetti/Beyonce_2019.png'
+    },
+    {
+      id: '0cb96922-e041-4094-9ec5-b8bedec0c8b0',
+      title: 'Spotify launches playlist for dogs left at home',
+      slug: 'spotifydogs-1856675784',
+      body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      description: 'apparently, pets need to be entertained',
+      readingTime: '0.003',
+      published: true,
+      tagList: ['nature', 'music'],
+      userId: '3d1c5f17-7580-4cea-8647-99e7440c5d43',
+      image: 'https://res.cloudinary.com/thedrizzyway/image/upload/v1584623767/forsetti/spotifyd.jpg'
     }], {}),
 
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete('Articles', null, {})
