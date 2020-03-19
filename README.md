@@ -5,9 +5,40 @@
 Authors Haven - A Social platform for the creative at heart.
 =======
 
-## Vision
-Create a community of like minded authors to foster inspiration and innovation
-by leveraging the modern web.
+<br />
+<p align="center">
 
-Api hosted [here](https://drizzyforsettibackend.herokuapp.com/api/v1)
-Api doumentation can be found [here](https://drizzyforsettibackend.herokuapp.com/docs/)
+  <h3 align="center">Authors Haven Backend</h3>
+
+  <p align="center">
+    The backend for the authpr's haven application.
+    <br />
+    <a href="https://drizzyforsettibackend.herokuapp.com/docs/" target="_blank">View Documentation</a>.
+    <a href="https://drizzyforsettibackend.herokuapp.com/api/v1">Hosted here</a>.
+  </p>
+</p>
+
+
+## Table of Contents
+
+* [About the Project](#about-the-project)
+* [Built With](#built-with)
+* [Getting Started](#getting-started)
+* [Prerequisites](#prerequisites)
+* [Installation](#installation)
+* [License](#license)
+
+
+## About The Project
+
+This is the backend service for the authors haven application. It is deployed on heroku.
+
+
+### Built With
+
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+* [PostgreSQL](https://www.postgresql.org/)
+* [Sequelize ORM](https://sequelize.org/)
+* [Babel](https://babeljs.io/)
+* [Mocha](https://mochajs.org/)
