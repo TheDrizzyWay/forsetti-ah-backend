@@ -11,7 +11,7 @@ Authors Haven - A Social platform for the creative at heart.
   <h3 align="center">Authors Haven Backend</h3>
 
   <p align="center">
-    The backend for the authpr's haven application.
+    The backend for the author's haven application.
     <br />
     <a href="https://drizzyforsettibackend.herokuapp.com/docs/" target="_blank">View Documentation</a>.
     <a href="https://drizzyforsettibackend.herokuapp.com/api/v1">Hosted here</a>.
@@ -34,11 +34,22 @@ Authors Haven - A Social platform for the creative at heart.
 This is the backend service for the authors haven application. It is deployed on heroku.
 
 
-### Built With
+### Tools
 
-* [Node.js](https://nodejs.org/en/)
-* [Express](https://expressjs.com/)
-* [PostgreSQL](https://www.postgresql.org/)
-* [Sequelize ORM](https://sequelize.org/)
-* [Babel](https://babeljs.io/)
-* [Mocha](https://mochajs.org/)
+> Backend (api)
+> - Node js and Express for server-side logic
+> - Babel for transpiling source code
+
+> Database
+> - PostgreSQL
+> - Sequelize ORM
+
+> Test Driven Development (TDD)
+> - Mocha and Chai for testing api routes
+> - Chai-http for simulating http calls
+
+> Continuous Integration
+> - Travis CI for automated testing
+> - Codeclimate for code quality report
+> - Coveralls for test coverage
+
