@@ -64,7 +64,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "cross-env": "^5.2.1",
-    "eslint": "^5.15.3",
+    "eslint": "^10.1.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.2",
     "mocha": "^10.8.2",
